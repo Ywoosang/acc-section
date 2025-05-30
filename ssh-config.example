@@ -1,0 +1,31 @@
+# Note:
+# update_ssh_config.sh 실행시 HostName 이 자동 갱신됩니다.
+# 복구가 필요하다면 생성된 .ssh/config.bak. 백업파일을 이용해 되돌릴 수 있습니다.
+# 아래 내용을 ~/.ssh/config 에 추가한 뒤
+# ssh <Host> 로 ssh 연결 합니다.
+
+# Bastion Host
+Host bastion
+  HostName 13.125.124.96
+  User ubuntu
+  IdentityFile <pem 키 경로>
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+
+# App
+Host acc-app
+  HostName 10.0.3.113
+  User ubuntu
+  IdentityFile <pem 키 경로>
+  ProxyCommand ssh -W %h:%p bastion
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
+
+# Monitoring
+Host acc-monitoring
+  HostName 10.0.4.139
+  User ubuntu
+  IdentityFile <pem 키 경로>
+  ProxyCommand ssh -W %h:%p bastion
+  StrictHostKeyChecking no
+  UserKnownHostsFile=/dev/null
