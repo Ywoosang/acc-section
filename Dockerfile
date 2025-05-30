@@ -1,6 +1,9 @@
 FROM gradle:8.4-jdk17 AS build
 WORKDIR /app
 COPY . .
+
+RUN echo "org.gradle.daemon=false" >> gradle.properties
+
 RUN gradle build -x test
 
 FROM eclipse-temurin:17-jre
