@@ -26,6 +26,22 @@ public class MdcFilter extends OncePerRequestFilter {
 
     private static final String TRACE_ID = "traceId";
 
+    private record HttpLogMessage(String method, String uri, int status, double elapsed) {
+
+        public String toString() {
+            return String.format("[HTTP] %s %s %d (%.3f sec)", method, uri, status, elapsed);
+        }
+
+        public static HttpLogMessage of(HttpServletRequest request, HttpServletResponse response, double elapsed) {
+            return new HttpLogMessage(
+                request.getMethod(),
+                request.getRequestURI(),
+                response.getStatus(),
+                elapsed
+            );
+        }
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
         throws ServletException, IOException {
@@ -53,22 +69,6 @@ public class MdcFilter extends OncePerRequestFilter {
         } finally {
             MDC.remove(TRACE_ID);
             responseWrapper.copyBodyToResponse();
-        }
-    }
-
-    private record HttpLogMessage(String method, String uri, int status, double elapsed) {
-
-        public static HttpLogMessage of(HttpServletRequest request, HttpServletResponse response, double elapsed) {
-            return new HttpLogMessage(
-                request.getMethod(),
-                request.getRequestURI(),
-                response.getStatus(),
-                elapsed
-            );
-        }
-
-        public String toString() {
-            return String.format("[HTTP] %s %s %d (%.3f sec)", method, uri, status, elapsed);
         }
     }
 }

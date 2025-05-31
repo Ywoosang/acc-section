@@ -15,10 +15,8 @@ public class StockDecreaseApplicationEventHandler {
 
     private static final Logger log = LoggerFactory.getLogger(StockDecreaseApplicationEventHandler.class);
 
-
     private final StockDecreaseAlarmSender stockDecreaseAlarmSender;
     private final StockDecreaseHistoryRecorder stockDecreaseHistoryRecorder;
-
 
     public StockDecreaseApplicationEventHandler(StockDecreaseAlarmSender stockDecreaseAlarmSender,
         StockDecreaseHistoryRecorder stockDecreaseHistoryRecorder

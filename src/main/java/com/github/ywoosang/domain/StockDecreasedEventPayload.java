@@ -4,4 +4,6 @@ public record StockDecreasedEventPayload(
     long stockId,
     long productId,
     int quantity
-) implements Payload {}
+) implements Payload {
+
+}

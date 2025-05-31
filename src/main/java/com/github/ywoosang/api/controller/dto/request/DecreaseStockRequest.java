@@ -6,6 +6,7 @@ public record DecreaseStockRequest(
     Long productId,
     Integer quantity
 ) {
+
     public DecreaseStockCommand toCommand() {
         return new DecreaseStockCommand(productId, quantity);
     }

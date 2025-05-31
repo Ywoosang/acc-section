@@ -3,8 +3,11 @@ package com.github.ywoosang.domain;
 import java.time.LocalDateTime;
 
 public abstract class DomainEvent<T extends Payload> {
+
     private final String traceId;
+
     private final T payload;
+
     private final LocalDateTime occurredAt;
 
     protected DomainEvent(String traceId, T payload) {

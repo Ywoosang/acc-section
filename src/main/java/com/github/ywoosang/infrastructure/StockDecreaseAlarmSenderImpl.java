@@ -11,7 +11,7 @@ public class StockDecreaseAlarmSenderImpl implements StockDecreaseAlarmSender {
     public void send(long stockId, int quantity) {
         try {
             Thread.sleep(1000);
-        } catch(InterruptedException e) {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }

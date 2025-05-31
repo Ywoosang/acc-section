@@ -15,6 +15,7 @@ import com.github.ywoosang.domain.StockRepository;
 
 @Service
 public class DecreaseStockServiceV2 {
+
     private static final Logger log = LoggerFactory.getLogger(DecreaseStockServiceV1.class);
 
     private final StockRepository stockRepository;
