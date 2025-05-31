@@ -38,3 +38,8 @@ out/
 
 ### pem
 *.pem
+
+### terraform
+terraform.tfstate
+terraform.tfvars
+

@@ -2,8 +2,7 @@
 
 ![](images/be7fba50.png)
 
-![](images/750544ad.png)
-
+![image](https://github.com/user-attachments/assets/42590edf-9d3e-4512-addf-50a8b897a63f)
 
 
 ## 인프라 실행 방법
