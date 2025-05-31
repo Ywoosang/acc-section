@@ -1,0 +1,17 @@
+### V1 재고 감소 요청
+POST http://localhost:8080/api/v1/stocks/decrease
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": 2
+}
+
+### V2 재고 감소 요청
+POST http://localhost:8080/api/v2/stocks/decrease
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": 2
+} 
