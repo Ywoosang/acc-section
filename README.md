@@ -1,4 +1,11 @@
 
+
+![](images/be7fba50.png)
+
+![](images/750544ad.png)
+
+
+
 ## 인프라 실행 방법
 
 aws cli 와 terraform 설치 이후 다음 절차로 이미지 업로드 및 실행 합니다.
