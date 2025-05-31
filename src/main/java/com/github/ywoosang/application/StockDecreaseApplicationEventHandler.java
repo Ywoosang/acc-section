@@ -3,6 +3,7 @@ package com.github.ywoosang.application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.event.TransactionPhase;
@@ -11,6 +12,7 @@ import org.springframework.transaction.event.TransactionalEventListener;
 import com.github.ywoosang.domain.StockDecreasedEvent;
 import com.github.ywoosang.domain.StockDecreasedEventPayload;
 
+@Component
 public class StockDecreaseApplicationEventHandler {
 
     private static final Logger log = LoggerFactory.getLogger(StockDecreaseApplicationEventHandler.class);
