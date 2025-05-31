@@ -38,7 +38,7 @@ resource "aws_security_group" "monitoring" {
 resource "aws_instance" "monitoring" {
   ami           = var.ami_id
   instance_type = var.instance_type
-  subnet_id     = var.private_subnet_id
+  subnet_id     = var.private_subnet_id # 172.16.11.0/24 (ap-northeast-2c)
   key_name      = var.key_name
 
   vpc_security_group_ids = [aws_security_group.monitoring.id]

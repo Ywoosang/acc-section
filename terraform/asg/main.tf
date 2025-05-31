@@ -1,4 +1,4 @@
-# EC2 인스턴스에 할당할 IAM 역할 (ECR 접근 등 권한 부여)
+# EC2 인스턴스에 할당할 IAM 역할
 resource "aws_iam_role" "ec2_role" {
   name = "${var.name_prefix}-ec2-role"
 
@@ -16,7 +16,7 @@ resource "aws_iam_role" "ec2_role" {
   })
 }
 
-# EC2 역할에 ECR ReadOnly 정책 연결
+# IAM 역할에 ECR ReadOnly 정책 연결
 resource "aws_iam_role_policy_attachment" "ecr_readonly_attach" {
   role       = aws_iam_role.ec2_role.name
   policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"
@@ -42,7 +42,6 @@ resource "aws_security_group" "backend" {
     security_groups = [var.bastion_sg_id]
   }
 
-  # 8080 포트는 전체 허용 (필요시 제한 가능)
   ingress {
     from_port   = 8080
     to_port     = 8080
@@ -62,26 +61,18 @@ resource "aws_security_group" "backend" {
   }
 }
 
-# 오토스케일링 그룹에서 사용할 EC2 인스턴스 템플릿(런치 템플릿)
 resource "aws_launch_template" "backend" {
-  # 인스턴스 이름 접두사
   name_prefix   = "${var.name_prefix}-backend-"
-  # 사용할 AMI ID
   image_id      = var.ami_id
-  # 인스턴스 타입
   instance_type = "t3.micro"
  
   key_name      = var.key_name
 
-  # 네트워크 인터페이스 설정
   network_interfaces {
-    # 퍼블릭 IP 할당 여부 (프라이빗 서브넷이므로 false)
     associate_public_ip_address = false
-    # 사용할 보안그룹 ID
     security_groups            = [aws_security_group.backend.id]
   }
 
-  # 인스턴스 시작 시 실행할 user_data (도커, ECR 로그인, 앱 실행 등)
   user_data = base64encode(templatefile("${path.module}/templates/user_data.tpl", {
     ecr_repository_url = var.ecr_repository_url
     region            = var.region
@@ -102,10 +93,9 @@ resource "aws_launch_template" "backend" {
   }
 }
 
-# ASG 로 인스턴스 자동 관리
 resource "aws_autoscaling_group" "backend" {
   name                = "${var.name_prefix}-backend-asg"
-  desired_capacity    = 1
+  desired_capacity    = 2
   max_size           = 4
   min_size           = 1
   target_group_arns  = [var.target_group_arn]

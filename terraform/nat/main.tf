@@ -4,7 +4,7 @@ resource "aws_eip" "nat" {
 
 resource "aws_nat_gateway" "main" {
   allocation_id = aws_eip.nat.id
-  subnet_id     = var.public_subnet_id
+  subnet_id     = var.public_subnet_id # 172.16.1.0/24 (ap-northeast-2c)
   tags = {
     Name = "${var.name_prefix}-nat"
   }
@@ -18,12 +18,8 @@ resource "aws_route_table" "private" {
   }
 }
 
-resource "aws_route_table_association" "private_a" {
-  subnet_id      = var.private_a_id
-  route_table_id = aws_route_table.private.id
-}
-
+# private_c만 NAT 라우팅
 resource "aws_route_table_association" "private_c" {
-  subnet_id      = var.private_c_id
+  subnet_id      = var.private_c_id # 172.16.11.0/24
   route_table_id = aws_route_table.private.id
 } 

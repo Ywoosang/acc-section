@@ -1,5 +1,5 @@
 resource "aws_vpc" "main" {
-  cidr_block           = "10.0.0.0/16"
+  cidr_block           = "172.16.0.0/16"
   
   # VPC 내에서 DNS 사용 가능
   enable_dns_hostnames = true
@@ -22,7 +22,7 @@ resource "aws_internet_gateway" "main" {
 
 resource "aws_subnet" "public_a" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.1.0/24"
+  cidr_block              = "172.16.0.0/24"
   availability_zone       = "ap-northeast-2a"
 
   # 서브넷에서 생성되는 모든 인스턴스에 퍼블릭 IP가 자동으로 할당
@@ -35,7 +35,7 @@ resource "aws_subnet" "public_a" {
 
 resource "aws_subnet" "public_c" {
   vpc_id                  = aws_vpc.main.id
-  cidr_block              = "10.0.2.0/24"
+  cidr_block              = "172.16.1.0/24"
   availability_zone       = "ap-northeast-2c"
   map_public_ip_on_launch = true
 
@@ -46,7 +46,7 @@ resource "aws_subnet" "public_c" {
 
 resource "aws_subnet" "private_a" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.3.0/24"
+  cidr_block        = "172.16.10.0/24"
   availability_zone = "ap-northeast-2a"
 
   tags = {
@@ -56,7 +56,7 @@ resource "aws_subnet" "private_a" {
 
 resource "aws_subnet" "private_c" {
   vpc_id            = aws_vpc.main.id
-  cidr_block        = "10.0.4.0/24"
+  cidr_block        = "172.16.11.0/24"
   availability_zone = "ap-northeast-2c"
 
   tags = {
