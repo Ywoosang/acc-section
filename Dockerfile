@@ -1,10 +1,13 @@
 FROM gradle:8.4-jdk17 AS build
 WORKDIR /app
-COPY . .
+
+COPY build.gradle settings.gradle gradlew gradlew.bat ./
+COPY gradle ./gradle
+COPY src ./srccd
 
 RUN echo "org.gradle.daemon=false" >> gradle.properties
 
-RUN gradle build -x test
+RUN gradle clean build -x test
 
 FROM eclipse-temurin:17-jre
 WORKDIR /app

@@ -23,6 +23,11 @@ variable "bastion_sg_id" {
   type        = string
 }
 
+variable "backend_sg_id" {
+  description = "Security group ID of backend EC2 (for allowing Promtail push)"
+  type        = string
+}
+
 variable "instance_type" {
   description = "EC2 instance type for monitoring server"
   type        = string

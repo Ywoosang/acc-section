@@ -64,7 +64,7 @@ resource "aws_security_group" "backend" {
 resource "aws_launch_template" "backend" {
   name_prefix   = "${var.name_prefix}-backend-"
   image_id      = var.ami_id
-  instance_type = "t3.micro"
+  instance_type = var.instance_type
  
   key_name      = var.key_name
 

@@ -21,4 +21,9 @@ variable "key_name" {
 variable "name_prefix" {
   description = "Prefix for resource names"
   type        = string
-} 
+}
+
+variable "instance_type" {
+  description = "Bastion EC2 Instance Type"
+  type        = string
+}

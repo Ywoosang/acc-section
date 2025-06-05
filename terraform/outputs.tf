@@ -6,6 +6,10 @@ output "monitoring_private_ip" {
   value = module.monitoring.private_ip
 }
 
+output "bastion_public_ip" {
+  value = module.bastion.public_ip
+}
+
 output "ecr_repository_url" {
   value = module.ecr.repository_url
 }
